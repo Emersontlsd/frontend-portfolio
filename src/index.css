@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  /* Definindo as cores neon para o Tailwind v4 */
+  --color-neon-cyan: #00f3ff;
+  --color-neon-pink: #ff00e5;
+  
+  /* Adicionando um efeito de brilho personalizado */
+  --shadow-neon: 0 0 15px rgba(0, 243, 255, 0.5);
+}
+
+@layer base {
+  body {
+    /* Remova o bg-slate-950 daqui e coloque no html */
+    @apply text-white antialiased;
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #020617; /* slate-950 direto no body */
+  }
+}
+
+#root {
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+/* Efeito de fundo futurista */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Aumentei um pouco a opacidade para você ter certeza que está vendo */
+  background: radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(255, 0, 229, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1; 
+}
+
+/* Customização das setas e paginação do Swiper */
+.swiper-button-next, .swiper-button-prev {
+  color: var(--color-neon-cyan) !important;
+  transform: scale(0.6);
+}
+
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--color-neon-cyan) !important;
+  box-shadow: 0 0 10px var(--color-neon-cyan);
+}
+
+/* Corrigindo a falha visual do preenchimento automático (Autofill) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: white !important;
+  -webkit-box-shadow: 0 0 0px 1000px #1e293b inset !important; /* Cor do bg-slate-800 */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* No seu index.css */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Para garantir que as estrelas fiquem sempre no fundo escuro perfeito */
+body {
+  background-color: #020617; 
+  margin: 0;
+  padding: 0;
+  color: white;
+}

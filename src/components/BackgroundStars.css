@@ -1,0 +1,59 @@
+/* BackgroundStars.css */
+
+/* Função para gerar sombras aleatórias (Estrelas) */
+/* n: número de estrelas, color: cor base */
+@function generate-stars($n, $color) {
+  $value: '#{random(2000)}px #{random(2000)}px #{$color}';
+  @for $i from 2 through $n {
+    $value: '#{$value}, #{random(2000)}px #{random(2000)}px #{$color}';
+  }
+  @return unquote($value);
+}
+
+/* Definição das Camadas de Estrelas */
+
+.stars-small {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  /* Cria 700 estrelas pequenas brancas */
+  box-shadow: generate-stars(700, #fff); 
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.stars-medium {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  /* Cria 200 estrelas médias, algumas azuladas */
+  box-shadow: generate-stars(200, rgba(255, 255, 255, 0.8)), 
+              generate-stars(50, rgba(6, 182, 212, 0.5)); /* Neon Cyan */
+  border-radius: 50%;
+}
+
+.stars-large {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  /* Cria 50 estrelas grandes e brilhantes */
+  box-shadow: generate-stars(50, #fff),
+              generate-stars(10, rgba(236, 72, 153, 0.4)); /* Neon Pink */
+  border-radius: 50%;
+  filter: blur(0.5px); /* Dá um leve brilho difuso */
+}
+
+/* Animações de Piscar (Pulse) */
+
+.animate-stars-fast {
+  animation: starsPulse 4s ease-in-out infinite;
+}
+
+.animate-stars-slow {
+  animation: starsPulse 8s ease-in-out infinite;
+}
+
+@keyframes starsPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
