@@ -10,7 +10,7 @@ const Feedback = () => {
   const [feedbacks, setFeedbacks] = useState([]);
 
   // URL Segura: Tenta pegar do .env ou usa o localhost como fallback
-  const API_URL = import.meta.env.VITE_API_URL || 'https://backend-portifolio-iota.vercel.app';
+  const API_URL = import.meta.env.VITE_API_URL; // || 'https://backend-portfolio-emerson.vercel.app';
 
   const carregarFeedbacks = async () => {
     try {
@@ -33,7 +33,7 @@ const Feedback = () => {
 
     const dadosFormulario = {
       nome,
-      comentario: mensagem, // Ajustado para 'comentario' como está no seu Service/DB
+      mensagem, // Ajustado para 'comentario' como está no seu Service/DB
       estrelas: rating,
       telefone
     };

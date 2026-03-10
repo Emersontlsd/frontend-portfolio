@@ -15,7 +15,7 @@ const ProjectSlider = () => {
   const navigate = useNavigate();
 
   // URL Segura para evitar o erro de 'undefined'
-  const API_URL = import.meta.env.VITE_API_URL || 'https://backend-portifolio-iota.vercel.app';
+  const API_URL = import.meta.env.VITE_API_URL; // || 'https://backend-portfolio-emerson.vercel.app';
 
   useEffect(() => {
     const loadProjects = async () => {

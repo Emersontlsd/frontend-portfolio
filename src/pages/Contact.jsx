@@ -7,7 +7,7 @@ const Contact = () => {
     const [isSending, setIsSending] = useState(false); // Estado para o botão de loading
 
     // URL centralizada para evitar o erro de 'undefined'
-    const API_URL = import.meta.env.VITE_API_URL || 'https://backend-portifolio-iota.vercel.app';
+    const API_URL = import.meta.env.VITE_API_URL;  // || 'https://backend-portfolio-emerson.vercel.app';
 
     const handleSubmit = async (e) => {
         e.preventDefault();
