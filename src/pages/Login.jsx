@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Lock, Mail, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Lock, Mail, Eye, EyeOff, Loader2, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Login = () => {
@@ -24,10 +25,8 @@ const Login = () => {
             const data = await response.json();
 
             if (response.ok) {
-                // salva o token
                 localStorage.setItem('token', data.token);
 
-                // feedback de sucesso
                 Swal.fire({
                     title: 'Acesso Autorizado',
                     text: `Bem vindo de volta, Emerson.`,
@@ -38,7 +37,6 @@ const Login = () => {
                     timer: 1500
                 });
 
-                // redireciona
                 setTimeout(() => {
                     window.location.href = '/dashboard';
                 }, 1500);
@@ -56,7 +54,7 @@ const Login = () => {
         } finally {
             setLoading(false);
         }
-    }// fim handleLogin
+    };
 
     return (
         <div className="min-h-screen bg-[#020617] flex items-center justify-center p-4 font-sans">
@@ -81,10 +79,10 @@ const Login = () => {
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-slate-800/40 border border-white/5 rounded-2xl p-4 pl-12 text-white outline-none focus:ring-1 ring-cyan-500 transition-all"
+                                    className="w-full bg-slate-800/40 border border-white/5 rounded-2xl p-4 pl-12 text-white outline-none focus:ring-1 ring-cyan-500 transition-all placeholder:text-slate-600"
                                     placeholder="admin@email.com"
                                 />
-                                <Mail className="absolute left-4 top-4.5 text-slate-500" size={18} />
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                             </div>
                         </div>
 
@@ -97,28 +95,39 @@ const Login = () => {
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-slate-800/40 border border-white/5 rounded-2xl p-4 pl-12 pr-12 text-white outline-none focus:ring-1 ring-cyan-500 transition-all"
+                                    className="w-full bg-slate-800/40 border border-white/5 rounded-2xl p-4 pl-12 pr-12 text-white outline-none focus:ring-1 ring-cyan-500 transition-all placeholder:text-slate-600"
                                     placeholder="••••••••"
                                 />
-                                <Lock className="absolute left-4 top-4.5 text-slate-500" size={18} />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-4 top-4.5 text-slate-500 hover:text-white transition-colors"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors"
                                 >
                                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                 </button>
                             </div>
                         </div>
 
-                        {/* Botão Entrar */}
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="w-full bg-cyan-500 text-slate-950 py-5 rounded-2xl font-black tracking-widest hover:brightness-110 shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-                        >
-                            {loading ? <Loader2 className="animate-spin" /> : 'ACESSAR PAINEL'}
-                        </button>
+                        {/* Botões do Formulário */}
+                        <div className="space-y-4 pt-2">
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full bg-cyan-500 text-slate-950 py-5 rounded-2xl font-black tracking-widest hover:brightness-110 shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                            >
+                                {loading ? <Loader2 className="animate-spin" /> : 'ACESSAR PAINEL'}
+                            </button>
+
+                            {/* BOTÃO VOLTAR (ABAIXO DO ACESSAR) */}
+                            <Link 
+                                to="/" 
+                                className="flex items-center justify-center gap-2 text-slate-500 hover:text-white transition-all py-2 group"
+                            >
+                                <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+                                <span className="text-[10px] font-black uppercase tracking-[0.2em]">Voltar para o site</span>
+                            </Link>
+                        </div>
                     </form>
                 </div>
 
@@ -128,7 +137,6 @@ const Login = () => {
             </div>
         </div>
     );
-
-} // fim Login
+}
 
 export default Login;
