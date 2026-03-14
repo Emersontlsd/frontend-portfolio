@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Terminal } from 'lucide-react';
+import { Menu, X, Terminal, Lock, LayoutDashboard } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  
+  // Verifica se o usuário está logado para mudar o texto do botão admin
+  const isAuthenticated = !!localStorage.getItem('token');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,6 +67,21 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
+
+          {/* BOTÃO ADMINISTRATIVO (NOVO) */}
+          <Link 
+            to={isAuthenticated ? "/dashboard" : "/login"}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-300 ${
+                location.pathname === '/login' || location.pathname === '/dashboard'
+                ? 'bg-white/10 border-white/20 text-white'
+                : 'bg-transparent border-white/5 text-slate-500 hover:text-white hover:border-white/20'
+            }`}
+          >
+            {isAuthenticated ? <LayoutDashboard size={14} /> : <Lock size={14} />}
+            <span className="text-[10px] font-black uppercase tracking-widest">
+                {isAuthenticated ? 'Dash' : 'Admin'}
+            </span>
+          </Link>
           
           <Link 
             to="/contact" 
@@ -73,7 +91,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* MOBILE TOGGLE - Adicionado aqui */}
+        {/* MOBILE TOGGLE */}
         <button 
           className="md:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -82,11 +100,11 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* MOBILE MENU - O bloco que faltava */}
+      {/* MOBILE MENU */}
       <div className={`fixed top-0 left-0 w-full h-screen bg-slate-950/98 backdrop-blur-2xl transition-all duration-500 md:hidden ${
         isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
       }`}>
-        <div className="flex flex-col h-full p-8 pt-24 space-y-8">
+        <div className="flex flex-col h-full p-8 pt-24 space-y-6">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -101,12 +119,22 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
+
+          {/* ACESSO ADMIN MOBILE */}
+          <Link 
+            to={isAuthenticated ? "/dashboard" : "/login"}
+            onClick={() => setIsMenuOpen(false)}
+            className="flex items-center gap-3 text-slate-500 font-black uppercase tracking-widest text-sm py-4 border-t border-white/5"
+          >
+            {isAuthenticated ? <LayoutDashboard size={20} /> : <Lock size={20} />}
+            {isAuthenticated ? 'Painel de Controle' : 'Área Restrita'}
+          </Link>
           
-          <div className="pt-8 border-t border-white/5">
+          <div className="pt-4">
             <Link 
               to="/contact" 
               onClick={() => setIsMenuOpen(false)}
-              className="inline-block bg-neon-pink text-white px-8 py-4 rounded-xl text-xs font-black uppercase tracking-widest shadow-[0_0_30px_rgba(236,72,153,0.4)]"
+              className="w-full text-center block bg-neon-pink text-white px-8 py-4 rounded-xl text-xs font-black uppercase tracking-widest shadow-[0_0_30px_rgba(236,72,153,0.4)]"
             >
               Solicitar Orçamento
             </Link>
