@@ -10,6 +10,7 @@ import Contact from './pages/Contact';
 import Feedback from './pages/Feedback';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import ProjectDetails from './pages/ProjectDetails';
 
 // Componente auxiliar para gerenciar elementos globais
 const AppContent = () => {
@@ -27,6 +28,7 @@ const AppContent = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectList />} />
+          <Route path="/projects/:id" element={<ProjectDetails />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/login" element={<Login />} />

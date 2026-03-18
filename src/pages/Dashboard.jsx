@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import ModalProjeto from '../components/ModalProjeto';
 
 const Dashboard = () => {
+    console.log("DASHBOARD ESTÁ VIVO!");
     const [activeTab, setActiveTab] = useState('projects');
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
