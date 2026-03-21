@@ -15,9 +15,32 @@ const Footer = () => {
                 </div>
 
                 <div className="flex gap-6">
-                    <a href="#" className="text-slate-400 hover:text-neon-cyan transition-colors"><Github /></a>
-                    <a href="#" className="text-slate-400 hover:text-neon-pink transition-colors"><Linkedin /></a>
-                    <a href="#" className="text-slate-400 hover:text-white transition-colors"><Instagram /></a>
+                    <a 
+                        href="https://github.com/emersontlsd"
+                        target='_blank'
+                        rel='noopener-noreferrer'
+                        className="text-slate-400 hover:text-cyan-400 transition-colors"
+                    >
+                        <Github size={20}/>
+                    </a>
+
+                    <a 
+                        href="http://linkedin.com/in/emerson-de-souza-dantas"
+                        target='_blank'
+                        rel='noopener-noreferrer'
+                        className="text-slate-400 hover:text-cyan-400 transition-colors"
+                    >
+                        <Linkedin size={20}/>
+                    </a>
+
+                    <a 
+                        href="https://www.instagram.com/EmersonTlsd"
+                        target='_blank'
+                        rel='noopener-noreferrer'
+                        className="text-slate-400 hover:text-cyan-400 transition-colors"
+                    >
+                        <Instagram size={20}/>
+                    </a>
                 </div>
             </div>
         </footer>
