@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Plus, Loader2, Menu } from 'lucide-react';
+import React, { useEffect, useState, useMemo } from 'react'; // Adicionado useMemo
+import { Plus, Loader2, Menu, Mail, MailWarning, BarChart3 } from 'lucide-react'; // Ícones novos
 import Swal from 'sweetalert2';
 
 // Importação dos Componentes Modulares
@@ -10,7 +10,7 @@ import ModalProjeto from '../../components/Shared/ModalProjeto';
 
 const Dashboard = () => {
     const [activeTab, setActiveTab] = useState('projects');
-    const [ isSidebarOpen, setIsSidebarOpen ] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isAuthorized, setIsAuthorized] = useState(false);
@@ -19,6 +19,15 @@ const Dashboard = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const API_URL = import.meta.env.VITE_API_URL;
+
+    // --- CÁLCULO DOS CONTADORES (Calcula sempre que 'data' mudar) ---
+    const stats = useMemo(() => {
+        if (activeTab !== 'contacts') return null;
+        return {
+            total: data.length,
+            naoLidos: data.filter(item => !item.lido).length
+        };
+    }, [data, activeTab]);
 
     // --- LÓGICA DE DADOS ---
     const fetchData = async () => {
@@ -56,7 +65,7 @@ const Dashboard = () => {
         return Object.values(item).some(val => val && val.toString().toLowerCase().includes(searchStr));
     });
 
-    // --- HANDLERS ---
+    // --- HANDLERS (Igual ao seu código) ---
     const handleLogout = () => {
         localStorage.removeItem('token');
         window.location.href = '/login';
@@ -64,12 +73,8 @@ const Dashboard = () => {
 
     const handleToggleRead = async (id, novoStatus) => {
         const token = localStorage.getItem('token');
-
-        // Otimismo: Atualiza na tela antes mesmo de ir ao banco
         setData(prev => prev.map(item => item.id === id ? { ...item, lido: novoStatus } : item));
-
         try {
-            // Ajustado para usar a query string ?id= conforme sua API
             const response = await fetch(`${API_URL}/api/contacts?id=${id}`, {
                 method: 'PATCH',
                 headers: {
@@ -78,23 +83,10 @@ const Dashboard = () => {
                 },
                 body: JSON.stringify({ lido: novoStatus }),
             });
-
             if (!response.ok) throw new Error('Falha ao atualizar no servidor');
-
-            // CORREÇÃO: Usando setData (que é seu estado real) em vez de setContacts
-            setData(prev => prev.map(item =>
-                item.id === id ? { ...item, lido: novoStatus } : item
-            ));
-
         } catch (error) {
+            fetchData(); // Recarrega se der erro para voltar o estado anterior
             console.error("Erro ao atualizar status:", error);
-            Swal.fire({
-                title: 'Erro!',
-                text: 'Não foi possível atualizar o status da mensagem.',
-                icon: 'error',
-                background: '#0f172a',
-                color: '#fff'
-            });
         }
     };
 
@@ -146,7 +138,6 @@ const Dashboard = () => {
     };
 
     const handleVerDetalhes = (item) => {
-        // Marca como lido automaticamente ao abrir, se ainda não estiver lido
         if (activeTab === 'contacts' && !item.lido) {
             handleToggleRead(item.id, true);
         }
@@ -170,7 +161,6 @@ const Dashboard = () => {
     return (
         <div className="flex min-h-screen bg-[#020617] text-slate-200 font-sans">
 
-            {/* Botão Hamburguer*/}
             <button 
                 onClick={() => setIsSidebarOpen(true)}
                 className="md:hidden fixed top-6 left-6 z-50 bg-cyan-400 text-slate-950 p-2 rounded-xl shadow-lg shadow-cyan-400/20"
@@ -187,13 +177,13 @@ const Dashboard = () => {
             />
 
             <main className="flex-1 p-6 md:p-12 overflow-y-auto">
-                <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+                <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
                     <div>
                         <h2 className="text-4xl font-black text-white uppercase italic tracking-tight">
                             Gerenciar <span className="text-cyan-400">{activeTab === 'projects' ? 'Projetos' : activeTab === 'contacts' ? 'Mensagens' : 'Feedbacks'}</span>
                         </h2>
-                        <p className="text-slate-500 text-sm mt-2 font-medium">
-                            {loading ? 'Sincronizando...' : `Exibindo ${filteredData.length} registros.`}
+                        <p className="text-slate-500 text-sm mt-2 font-medium uppercase tracking-widest">
+                            {loading ? 'Sincronizando...' : `Painel de Controle Principal`}
                         </p>
                     </div>
 
@@ -211,10 +201,47 @@ const Dashboard = () => {
                     </div>
                 </header>
 
+                {/* --- SEÇÃO DE CONTADORES (Apenas para Mensagens) --- */}
+                {activeTab === 'contacts' && !loading && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+                        <div className="bg-slate-900/50 border border-white/5 p-5 rounded-3xl flex items-center gap-5 backdrop-blur-sm">
+                            <div className="bg-blue-500/10 p-3 rounded-2xl text-blue-400">
+                                <Mail size={24} />
+                            </div>
+                            <div>
+                                <p className="text-xs text-slate-500 font-bold uppercase tracking-tighter">Total Recebido</p>
+                                <p className="text-2xl font-black text-white">{stats.total}</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-slate-900/50 border border-white/5 p-5 rounded-3xl flex items-center gap-5 backdrop-blur-sm">
+                            <div className="bg-amber-500/10 p-3 rounded-2xl text-amber-400">
+                                <MailWarning size={24} />
+                            </div>
+                            <div>
+                                <p className="text-xs text-slate-500 font-bold uppercase tracking-tighter">Não Lidos</p>
+                                <p className="text-2xl font-black text-white">{stats.naoLidos}</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-slate-900/50 border border-white/5 p-5 rounded-3xl hidden lg:flex items-center gap-5 backdrop-blur-sm">
+                            <div className="bg-cyan-500/10 p-3 rounded-2xl text-cyan-400">
+                                <BarChart3 size={24} />
+                            </div>
+                            <div>
+                                <p className="text-xs text-slate-500 font-bold uppercase tracking-tighter">Taxa de Leitura</p>
+                                <p className="text-2xl font-black text-white">
+                                    {stats.total > 0 ? Math.round(((stats.total - stats.naoLidos) / stats.total) * 100) : 0}%
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-20 text-slate-500 gap-4">
                         <Loader2 className="animate-spin text-cyan-400" size={40} />
-                        <span className="font-bold tracking-widest text-xs uppercase">Carregando...</span>
+                        <span className="font-bold tracking-widest text-xs uppercase">Carregando dados...</span>
                     </div>
                 ) : filteredData.length === 0 ? (
                     <div className="bg-slate-900/40 rounded-3xl border border-dashed border-white/10 p-20 text-center text-slate-500 italic font-bold">
