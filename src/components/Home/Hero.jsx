@@ -46,7 +46,7 @@ const Hero = () => {
 
             <p>
               Minha jornada vai muito além das linhas de código. Enquanto percorro as ruas de Brasília como 
-              <span className="text-white font-medium"> motorista executivo em um carro elétrico</span>, estou sempre observando como a tecnologia facilita a vida das pessoas. 
+              <span className="text-white font-medium"> motorista executivo e por aplicativo em um carro elétrico</span>, estou sempre observando como a tecnologia facilita a vida das pessoas. 
               Essa paixão por resolver dificuldades, sejam elas minhas ou de terceiros, foi o que me trouxe até aqui.
             </p>
 
