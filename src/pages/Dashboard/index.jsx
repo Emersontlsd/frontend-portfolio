@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, Loader2 } from 'lucide-react';
+import { Plus, Loader2, Menu } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 // Importação dos Componentes Modulares
@@ -10,6 +10,7 @@ import ModalProjeto from '../../components/Shared/ModalProjeto';
 
 const Dashboard = () => {
     const [activeTab, setActiveTab] = useState('projects');
+    const [ isSidebarOpen, setIsSidebarOpen ] = useState(false);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isAuthorized, setIsAuthorized] = useState(false);
@@ -168,7 +169,22 @@ const Dashboard = () => {
 
     return (
         <div className="flex min-h-screen bg-[#020617] text-slate-200 font-sans">
-            <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={handleLogout} />
+
+            {/* Botão Hamburguer*/}
+            <button 
+                onClick={() => setIsSidebarOpen(true)}
+                className="md:hidden fixed top-6 left-6 z-50 bg-cyan-400 text-slate-950 p-2 rounded-xl shadow-lg shadow-cyan-400/20"
+            >
+                <Menu size={24} strokeWidth={3} />
+            </button>
+
+            <Sidebar 
+                activeTab={activeTab} 
+                setActiveTab={setActiveTab} 
+                onLogout={handleLogout} 
+                isOpen={isSidebarOpen}
+                setIsOpen={setIsSidebarOpen}
+            />
 
             <main className="flex-1 p-6 md:p-12 overflow-y-auto">
                 <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
