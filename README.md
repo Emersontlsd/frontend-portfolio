@@ -1,6 +1,6 @@
 # Frontend - Portfolio Emerson Dev
 
-Este é o frontend do portfólio pessoal de Emerson, um desenvolvedor Full Stack especializado em JavaScript (React & Node). O projeto apresenta um design moderno e responsivo, com tema escuro inspirado em espaço sideral, utilizando animações suaves e interações dinâmicas.
+Este é o frontend do meu portfólio pessoal. Sou desenvolvedor Full Stack especializado em JavaScript (React & Node). O projeto apresenta um design moderno e responsivo, com tema escuro inspirado em espaço sideral, utilizando animações suaves e interações dinâmicas.
 
 ## 🚀 Funcionalidades
 
