@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Importação necessária para navegação
+import { Link } from 'react-router-dom'; 
 import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 
 const ProjectList = () => {

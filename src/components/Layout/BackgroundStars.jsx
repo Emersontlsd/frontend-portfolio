@@ -1,13 +1,13 @@
 import React from 'react';
 
 const BackgroundStars = () => {
-  // Gerador de estrelas aleatórias via Shadow (700 estrelas)
+  // Gerador de estrelas aleatórias via Shadow 
   const generateStars = (count) => {
     let stars = "";
     for (let i = 0; i < count; i++) {
       const x = Math.floor(Math.random() * 2000);
       const y = Math.floor(Math.random() * 2000);
-      stars += `${x}px ${y}px #fff${i % 10 === 0 ? ', ' : ' '}`; // Adiciona vírgula a cada sombra
+      stars += `${x}px ${y}px #fff${i % 10 === 0 ? ', ' : ' '}`; 
     }
     return stars.trim().replace(/\s+$/, "").replace(/ $/, "").split(' ').join(', ');
   };

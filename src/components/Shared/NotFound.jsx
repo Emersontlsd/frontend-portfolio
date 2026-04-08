@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// Trocamos Planet por Orbit para evitar o SyntaxError
+
 import { Rocket, Orbit, MapPinOff } from 'lucide-react';
 
 const NotFound = () => {
@@ -11,7 +11,7 @@ const NotFound = () => {
       <div className="relative mb-12 flex items-center justify-center">
         <MapPinOff size={100} className="text-pink-500 opacity-20" />
         <Rocket size={60} className="text-cyan-400 absolute -top-10 -right-10 animate-bounce" />
-        {/* Usando Orbit no lugar de Planet */}
+        {/* Usando Orbit */}
         <Orbit size={120} className="text-white/10 absolute -z-10 animate-spin-slow" />
       </div>
 

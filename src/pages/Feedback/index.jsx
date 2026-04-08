@@ -9,8 +9,7 @@ const Feedback = () => {
   const [rating, setRating] = useState(5);
   const [feedbacks, setFeedbacks] = useState([]);
 
-  // URL Segura: Tenta pegar do .env ou usa o localhost como fallback
-  const API_URL = import.meta.env.VITE_API_URL; // || 'https://backend-portfolio-emerson.vercel.app';
+  const API_URL = import.meta.env.VITE_API_URL; 
 
   const carregarFeedbacks = async () => {
     try {
@@ -33,7 +32,7 @@ const Feedback = () => {
 
     const dadosFormulario = {
       nome,
-      mensagem, // Ajustado para 'comentario' como está no seu Service/DB
+      mensagem,
       estrelas: rating,
       telefone
     };
@@ -139,7 +138,6 @@ const Feedback = () => {
                     ))}
                   </div>
                 </div>
-                {/* Aqui verificamos se o campo veio como 'comentario' ou 'mensagem' do banco */}
                 <p className='text-slate-300 leading-relaxed italic'>"{f.comentario || f.mensagem}"</p>
               </div>
             ))    

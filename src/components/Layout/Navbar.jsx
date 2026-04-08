@@ -68,7 +68,7 @@ const Navbar = () => {
             </Link>
           ))}
 
-          {/* BOTÃO ADMINISTRATIVO (NOVO) */}
+          {/* BOTÃO ADMINISTRATIVO  */}
           <Link 
             to={isAuthenticated ? "/dashboard" : "/login"}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-300 ${

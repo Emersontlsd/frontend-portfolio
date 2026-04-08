@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
-// IMPORTAÇÃO CENTRALIZADA (Graças ao index.js)
+
 import { Navbar, Footer, BackgroundStars, NotFound } from './components';
 
-// Páginas 
+
 import Home from './pages/Home';
 import ProjectList from './pages/Projects/List';
 import ProjectDetails from './pages/Projects/Details';

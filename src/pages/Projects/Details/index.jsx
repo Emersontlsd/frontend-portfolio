@@ -43,9 +43,6 @@ const ProjectDetails = () => {
     return (
         <div className='min-h-screen bg-[#020617] text-slate-300 pb-32 font-sans'>
             
-            {/* Removi a navbar interna que estava dando conflito.
-               O PT-40 (padding top) garante que o título apareça ABAIXO da sua navbar principal.
-            */}
             <div className='max-w-4xl mx-auto px-6 pt-40'>
                 
                 {/* BOTÃO VOLTAR SOLTO NO LAYOUT */}

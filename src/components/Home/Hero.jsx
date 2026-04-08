@@ -31,12 +31,12 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* SUBTÍTULO IMPACTANTE */}
+          {/* SUBTÍTULO  */}
           <h2 className="text-xl md:text-2xl font-bold text-cyan-400 mb-6 uppercase tracking-[4px]">
             Transformando desafios em soluções digitais eficientes.
           </h2>
 
-          {/* CORPO DO TEXTO (STORYTELLER) */}
+          {/* CORPO DO TEXTO  */}
           <div className="text-slate-400 text-base md:text-lg mb-10 max-w-3xl mx-auto leading-relaxed space-y-4 text-justify md:text-center">
             <p>
               Olá! Sou <span className='text-white font-semibold'>Emerson</span>, desenvolvedor Full Stack com formação em 

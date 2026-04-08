@@ -47,7 +47,7 @@ const Sidebar = ({ activeTab, setActiveTab, onLogout, isOpen, setIsOpen }) => {
                                 key={item.id}
                                 onClick={() => {
                                     setActiveTab(item.id);
-                                    setIsOpen(false); // Fecha o menu ao clicar (importante no mobile)
+                                    setIsOpen(false); // Fecha o menu ao clicar
                                 }}
                                 className={`w-full flex items-center gap-4 px-5 py-4 rounded-xl font-bold text-sm transition-all ${
                                     activeTab === item.id

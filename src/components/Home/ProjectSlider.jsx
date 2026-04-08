@@ -67,7 +67,7 @@ const ProjectSlider = () => {
       >
         {projects.map((project) => (
           <SwiperSlide key={project.id} className="max-w-[320px] md:max-w-[450px] py-10">
-            {/* ADICIONADO: cursor-pointer e onClick para navegar */}
+            
             <div 
               onClick={() => handleProjectClick(project.id)}
               className="group relative bg-slate-900/80 rounded-3xl overflow-hidden border border-white/10 backdrop-blur-sm shadow-2xl cursor-pointer hover:border-neon-cyan/50 transition-all duration-500"

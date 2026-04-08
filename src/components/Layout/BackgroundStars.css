@@ -1,7 +1,4 @@
-/* BackgroundStars.css */
 
-/* Função para gerar sombras aleatórias (Estrelas) */
-/* n: número de estrelas, color: cor base */
 @function generate-stars($n, $color) {
   $value: '#{random(2000)}px #{random(2000)}px #{$color}';
   @for $i from 2 through $n {

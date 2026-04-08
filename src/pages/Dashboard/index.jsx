@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useMemo } from 'react'; // Adicionado useMemo
-import { Plus, Loader2, Menu, Mail, MailWarning, BarChart3 } from 'lucide-react'; // Ícones novos
+import React, { useEffect, useState, useMemo } from 'react';
+import { Plus, Loader2, Menu, Mail, MailWarning, BarChart3 } from 'lucide-react'; 
 import Swal from 'sweetalert2';
 
-// Importação dos Componentes Modulares
+
 import Sidebar from '../../components/Dashboard/Sidebar';
 import ContactCard from '../../components/Dashboard/ContactCard';
 import DataTable from '../../components/Dashboard/DataTable';
@@ -65,7 +65,7 @@ const Dashboard = () => {
         return Object.values(item).some(val => val && val.toString().toLowerCase().includes(searchStr));
     });
 
-    // --- HANDLERS (Igual ao seu código) ---
+    // --- HANDLERS  ---
     const handleLogout = () => {
         localStorage.removeItem('token');
         window.location.href = '/login';
